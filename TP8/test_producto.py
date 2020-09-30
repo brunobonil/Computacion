@@ -123,8 +123,12 @@ class TestProducto(unittest.TestCase):
         lista_filtrada = ProductoService.get_lista_estado(self, lista, estado)
         self.assertDictEqual(lista_filtrada, dicc)
 
-
-    #def test_valor_negativo(self, ):
+    @parameterized.expand([
+        ("lenovo t490", -5000, 'computadoras')
+    ])
+    def test_valor_negativo(self, descripcion, precio, tipo):
+        with self.assertRaises(ValueError):
+            producto = Producto(descripcion, precio, tipo)
 
 
 if __name__ == '__main__':
